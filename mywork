@@ -54,7 +54,7 @@ def main():
     m = virt_mem()
     dis= disk_info()
     show(m,k,dis)
-
+    
 
 if __name__ =='__main__':
     main()
