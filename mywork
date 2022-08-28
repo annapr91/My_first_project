@@ -28,23 +28,23 @@ def show(m,k,dis):
     header_for_CPU ='|{:*^60}'.format('CPU') +'\n'
     header_for_CPU +='|'+ '_'*60 + '|'+'\n'
     for i in k:
-        header_for_CPU+='|{:^30}'.format(i) +'|{:^29}|'.format(k[i])+'\n'
-        header_for_CPU+='|'+ '_'*60  + '|'+ '\n'
+        header_for_CPU += '|{:^30}'.format(i) +'|{:^29}|'.format(k[i])+'\n'
+        header_for_CPU += '|'+ '_'*60  + '|'+ '\n'
     
-    header_for_Memory='|{:*^60}|'.format('MEMORY') +'\n'
-    header_for_Memory+='|'+ '_'*60 + '|'+'\n'
+    header_for_Memory = '|{:*^60}|'.format('MEMORY') +'\n'
+    header_for_Memory += '|'+ '_'*60 + '|'+'\n'
     for j in m:
         if j == 'MEM_usage':
-            header_for_Memory+='|{:^30}'.format(j) + '|{:^29}|'.format(str(m[j]) + '%')+'\n'
+            header_for_Memory += '|{:^30}'.format(j) + '|{:^29}|'.format(str(m[j]) + '%')+'\n'
         else:
-            header_for_Memory+='|{:^30}'.format(j) +'|{:^29}|'.format(m[j])+'\n'
-            header_for_Memory+='|'+ '_'*60 + '|'+'\n'
+            header_for_Memory += '|{:^30}'.format(j) +'|{:^29}|'.format(m[j])+'\n'
+            header_for_Memory += '|'+ '_'*60 + '|'+'\n'
             
-    header_for_Disk='|{:*^60}|'.format('DISK') +'\n'
-    header_for_Disk+='|'+ '_'*60 + '|'+'\n'  
+    header_for_Disk = '|{:*^60}|'.format('DISK') +'\n'
+    header_for_Disk += '|'+ '_'*60 + '|'+'\n'  
     for r in dis:
-        header_for_Disk+='|{:^30}'.format(r) +'|{:^29}|'.format(dis[r])+'\n'
-        header_for_Disk+='|'+ '_'*60 + '|'+'\n'
+        header_for_Disk += '|{:^30}'.format(r) +'|{:^29}|'.format(dis[r])+'\n'
+        header_for_Disk += '|'+ '_'*60 + '|'+'\n'
 
     print(header_for_CPU,header_for_Memory,header_for_Disk)  
 
