@@ -1,4 +1,17 @@
 import psutil
+import json
+
+
+
+def decor_func(func):
+    def filename():
+        with open('data1.json', 'a') as outfile:
+            res = func()
+            json.dump(res, outfile, sort_keys=True, indent=2)
+        return res
+
+    return filename
+
 
 
 def virt_mem():
@@ -24,36 +37,38 @@ def disk_info():
     return disk
 
 
-def show(m,k,dis):
-    header_for_CPU ='|{:*^60}'.format('CPU') +'\n'
-    header_for_CPU +='|'+ '_'*60 + '|'+'\n'
-    for i in k:
-        header_for_CPU += '|{:^30}'.format(i) +'|{:^29}|'.format(k[i])+'\n'
-        header_for_CPU += '|'+ '_'*60  + '|'+ '\n'
-    
-    header_for_Memory = '|{:*^60}|'.format('MEMORY') +'\n'
-    header_for_Memory += '|'+ '_'*60 + '|'+'\n'
-    for j in m:
+def show(_VIRT_mem, _CPU, _DISK):
+    header_for_CPU = '|{:*^60}'.format('CPU') + '\n'
+    header_for_CPU += '|' + '_' * 60 + '|' + '\n'
+    for i in _CPU:
+        header_for_CPU += '|{:^30}'.format(i) + '|{:^29}|'.format(_CPU[i]) + '\n'
+        header_for_CPU += '|' + '_' * 60 + '|' + '\n'
+
+    header_for_Memory = '|{:*^60}|'.format('MEMORY') + '\n'
+    header_for_Memory += '|' + '_' * 60 + '|' + '\n'
+    for j in _VIRT_mem:
         if j == 'MEM_usage':
-            header_for_Memory += '|{:^30}'.format(j) + '|{:^29}|'.format(str(m[j]) + '%')+'\n'
+            header_for_Memory += '|{:^30}'.format(j) + '|{:^29}|'.format(str(_VIRT_mem[j]) + '%') + '\n'
         else:
-            header_for_Memory += '|{:^30}'.format(j) +'|{:^29}|'.format(m[j])+'\n'
-            header_for_Memory += '|'+ '_'*60 + '|'+'\n'
-            
-    header_for_Disk = '|{:*^60}|'.format('DISK') +'\n'
-    header_for_Disk += '|'+ '_'*60 + '|'+'\n'  
-    for r in dis:
-        header_for_Disk += '|{:^30}'.format(r) +'|{:^29}|'.format(dis[r])+'\n'
-        header_for_Disk += '|'+ '_'*60 + '|'+'\n'
+            header_for_Memory += '|{:^30}'.format(j) + '|{:^29}|'.format(_VIRT_mem[j]) + '\n'
+            header_for_Memory += '|' + '_' * 60 + '|' + '\n'
 
-    print(header_for_CPU,header_for_Memory,header_for_Disk)  
+    header_for_Disk = '|{:*^60}|'.format('DISK') + '\n'
+    header_for_Disk += '|' + '_' * 60 + '|' + '\n'
+    for r in _DISK:
+        header_for_Disk += '|{:^30}'.format(r) + '|{:^29}|'.format(_DISK[r]) + '\n'
+        header_for_Disk += '|' + '_' * 60 + '|' + '\n'
+
+    print(header_for_CPU, header_for_Memory, header_for_Disk) 
 
 
+@decor_func
 def main():
-    k=cpu_info()
-    m = virt_mem()
-    dis= disk_info()
-    show(m,k,dis)
+    _CPU = cpu_info()
+    _VIRT_mem = virt_mem()
+    _DISK = disk_info()
+    show(_CPU, _VIRT_mem, _DISK)
+    return _CPU, _VIRT_mem, _DISK
     
 
 if __name__ =='__main__':

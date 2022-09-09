@@ -1,0 +1,19 @@
+[
+  {
+    "idle": 1196392.12,
+    "system": 10963.03,
+    "user": 11843.75
+  },
+  {
+    "Available_MEM": 7.55,
+    "MEM_usage": 55,
+    "Total_MEM": 16.87,
+    "Used_MEM": 9.32
+  },
+  {
+    "Free": 852.02,
+    "Percent": 14.8,
+    "Total": 999.92,
+    "Used": 147.9
+  }
+]
