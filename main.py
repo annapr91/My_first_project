@@ -1,10 +1,22 @@
 import psutil
+from abc import ABC,abstractmethod
 
 
-class CpuInfo:
+class BaseInterface(ABC):
+
+    @abstractmethod
+    def _table(self):
+        ...
+
+    @abstractmethod
+    def get_data(self):
+        ...
+
+
+class CpuInfo(BaseInterface):
     cpu = {}
 
-    def get_data(self,):
+    def get_data(self):
         self.cpu.update(user=round(psutil.cpu_times().user, 2),
                         system=round(psutil.cpu_times().system, 2),
                         idle=round(psutil.cpu_times().idle, 2))
@@ -24,7 +36,7 @@ class CpuInfo:
         return self._table()
 
 
-class VirtMem:
+class VirtMem(BaseInterface):
     mem = {}
 
     def get_data(self):
@@ -50,7 +62,7 @@ class VirtMem:
         return self._table()
 
 
-class DiskInfo:
+class DiskInfo(BaseInterface):
     disk = {}
 
     def get_data(self):
